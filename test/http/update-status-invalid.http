@@ -1,0 +1,6 @@
+PATCH http://localhost:3000/tasks/75c839ed-1277-4a12-a662-55b8e97108ec/status
+Content-Type: application/json
+
+{
+    "status": "SOME-INVALID-STATUS"
+}

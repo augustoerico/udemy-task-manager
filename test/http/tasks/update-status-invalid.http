@@ -1,5 +1,6 @@
 PATCH http://localhost:3000/tasks/75c839ed-1277-4a12-a662-55b8e97108ec/status
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2NzY3MjM5MjcsImV4cCI6MTY3NjcyNzUyN30.3tI4vV8MFFG9TerI3FywMt1aQr3zjRffq2K4faEEjl0
 
 {
     "status": "SOME-INVALID-STATUS"

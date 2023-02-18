@@ -18,16 +18,16 @@ export class TasksService {
         return this.repository.insertTask(dto, user);
     }
 
-    async read(id: string): Promise<Task> {
-        return this.repository.findOne({ id });
+    async read(id: string, user: User): Promise<Task> {
+        return this.repository.findOne({ id, user });
     }
 
     async readMany(filter: ReadManyFilter, user: User): Promise<Task[]> {
         return this.repository.fetchManyTasks(filter, user);
     }
 
-    async update(id: string, status: Status) {
-        const task = await this.read(id);
+    async update(id: string, status: Status, user: User) {
+        const task = await this.read(id, user);
         if (task) {
             task.status = status;
             this.repository.save(task);
@@ -36,8 +36,8 @@ export class TasksService {
         throw new NotFoundException();
     }
 
-    async delete(id: string) {
-        const task = await this.read(id);
+    async delete(id: string, user: User) {
+        const task = await this.read(id, user);
         if (task) return this.repository.remove([task]);
         throw new NotFoundException();
     }

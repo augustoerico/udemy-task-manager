@@ -33,8 +33,8 @@ export class TasksController {
     }
 
     @Get('/:id')
-    async read(@Param('id') id: string): Promise<Task> {
-        const task = await this.tasksServices.read(id);
+    async read(@Param('id') id: string, @GetUser() user: User): Promise<Task> {
+        const task = await this.tasksServices.read(id, user);
         if (task) return task;
         throw new NotFoundException();
     }
@@ -48,13 +48,17 @@ export class TasksController {
     }
 
     @Patch('/:id/status')
-    async update(@Param('id') id: string, @Body() dto: UpdateTaskStatusDto) {
+    async update(
+        @Param('id') id: string,
+        @Body() dto: UpdateTaskStatusDto,
+        @GetUser() user: User,
+    ) {
         const { status } = dto;
-        return await this.tasksServices.update(id, status);
+        return await this.tasksServices.update(id, status, user);
     }
 
     @Delete('/:id')
-    async delete(@Param('id') id: string): Promise<void> {
-        await this.tasksServices.delete(id);
+    async delete(@Param('id') id: string, @GetUser() user): Promise<void> {
+        await this.tasksServices.delete(id, user);
     }
 }

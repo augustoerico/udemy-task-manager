@@ -11,6 +11,8 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ReadManyFilter } from './dto/read-many-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
@@ -23,8 +25,11 @@ export class TasksController {
     constructor(private tasksServices: TasksService) {}
 
     @Post()
-    async create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-        return await this.tasksServices.create(createTaskDto);
+    async create(
+        @Body() createTaskDto: CreateTaskDto,
+        @GetUser() user: User,
+    ): Promise<Task> {
+        return await this.tasksServices.create(createTaskDto, user);
     }
 
     @Get('/:id')
@@ -35,8 +40,11 @@ export class TasksController {
     }
 
     @Get()
-    async readMany(@Query() filter: ReadManyFilter): Promise<Task[]> {
-        return this.tasksServices.readMany(filter);
+    async readMany(
+        @Query() filter: ReadManyFilter,
+        @GetUser() user,
+    ): Promise<Task[]> {
+        return this.tasksServices.readMany(filter, user);
     }
 
     @Patch('/:id/status')

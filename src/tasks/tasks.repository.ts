@@ -1,3 +1,4 @@
+import { User } from 'src/auth/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ReadManyFilter } from './dto/read-many-filter.dto';
@@ -6,8 +7,11 @@ import { Task } from './task.entity';
 
 @EntityRepository(Task)
 export class TasksRepository extends Repository<Task> {
-    async fetchManyTasks(filter: ReadManyFilter) {
+    async fetchManyTasks(filter: ReadManyFilter, user: User) {
         const query = this.createQueryBuilder('task');
+
+        query.where({ user });
+
         const { status, q } = filter;
         if (status) {
             query.andWhere('task.status = :status', { status });
@@ -21,12 +25,13 @@ export class TasksRepository extends Repository<Task> {
         return query.getMany();
     }
 
-    async insertTask(dto: CreateTaskDto) {
+    async insertTask(dto: CreateTaskDto, user: User) {
         const { title, description } = dto;
         const task = this.create({
             title,
             description,
             status: Status.OPEN,
+            user,
         });
         await this.save(task);
         return task;

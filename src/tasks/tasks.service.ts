@@ -5,6 +5,7 @@ import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Status } from './task-status.enum';
 import { ReadManyFilter } from './dto/read-many-filter.dto';
+import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class TasksService {
@@ -13,16 +14,16 @@ export class TasksService {
         private repository: TasksRepository,
     ) {}
 
-    async create(dto: CreateTaskDto): Promise<Task> {
-        return this.repository.insertTask(dto);
+    async create(dto: CreateTaskDto, user: User): Promise<Task> {
+        return this.repository.insertTask(dto, user);
     }
 
     async read(id: string): Promise<Task> {
         return this.repository.findOne({ id });
     }
 
-    async readMany(filter: ReadManyFilter): Promise<Task[]> {
-        return this.repository.fetchManyTasks(filter);
+    async readMany(filter: ReadManyFilter, user: User): Promise<Task[]> {
+        return this.repository.fetchManyTasks(filter, user);
     }
 
     async update(id: string, status: Status) {

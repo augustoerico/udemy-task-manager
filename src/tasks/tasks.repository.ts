@@ -8,9 +8,15 @@ import { Task } from './task.entity';
 export class TasksRepository extends Repository<Task> {
     async fetchManyTasks(filter: ReadManyFilter) {
         const query = this.createQueryBuilder('task');
-        const { status } = filter;
+        const { status, q } = filter;
         if (status) {
             query.andWhere('task.status = :status', { status });
+        }
+        if (q) {
+            query.andWhere(
+                'LOWER(task.title) LIKE :q OR LOWER(task.description) LIKE :q',
+                { q: `%${q.toLowerCase()}%` },
+            );
         }
         return query.getMany();
     }

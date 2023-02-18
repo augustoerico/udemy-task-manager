@@ -2,4 +2,12 @@ GET http://localhost:3000/tasks
 
 ###
 
-GET http://localhost:3000/tasks?status=CLOSED
+GET http://localhost:3000/tasks?status=IN_PROGRESS
+
+###
+
+GET http://localhost:3000/tasks?q=DISHES
+
+###
+
+GET http://localhost:3000/tasks?q=DISHES&status=IN_PROGRESS

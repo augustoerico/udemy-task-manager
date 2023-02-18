@@ -1,7 +1,7 @@
-PATCH http://localhost:3000/tasks/5e566a37-d198-4420-8be9-9b309dd0f3ee/status
+PATCH http://localhost:3000/tasks/a527cd38-f7c2-44a6-9907-da78b02724df/status
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2NzY3MjM5MjcsImV4cCI6MTY3NjcyNzUyN30.3tI4vV8MFFG9TerI3FywMt1aQr3zjRffq2K4faEEjl0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWF0IjoxNjc2NzI2MzI4LCJleHAiOjE2NzY3Mjk5Mjh9.3zB4N1OKWdguHdp0yt43S0RrjPw1CGOBCzgz39nSOsU
 
 {
-    "status": "IN_PROGRESS"
+    "status": "CLOSED"
 }

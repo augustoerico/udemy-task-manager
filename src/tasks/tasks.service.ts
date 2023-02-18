@@ -5,7 +5,7 @@ import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Status } from './task-status.enum';
 import { ReadManyFilter } from './dto/read-many-filter.dto';
-import { User } from 'src/auth/user.entity';
+import { User } from '../auth/user.entity';
 
 @Injectable()
 export class TasksService {

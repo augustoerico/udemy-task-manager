@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Status } from './task-status.enum';
+import { ReadManyFilter } from './dto/read-many-filter.dto';
 
 @Injectable()
 export class TasksService {
@@ -20,8 +21,8 @@ export class TasksService {
         return this.repository.findOne({ id });
     }
 
-    async readMany(): Promise<Task[]> {
-        return this.repository.fetchManyTasks();
+    async readMany(filter: ReadManyFilter): Promise<Task[]> {
+        return this.repository.fetchManyTasks(filter);
     }
 
     async update(id: string, status: Status) {

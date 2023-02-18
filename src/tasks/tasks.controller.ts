@@ -7,8 +7,10 @@ import {
     Param,
     Patch,
     Post,
+    Query,
 } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { ReadManyFilter } from './dto/read-many-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
@@ -30,8 +32,8 @@ export class TasksController {
     }
 
     @Get()
-    async readMany(): Promise<Task[]> {
-        return this.tasksServices.readMany();
+    async readMany(@Query() filter: ReadManyFilter): Promise<Task[]> {
+        return this.tasksServices.readMany(filter);
     }
 
     @Patch('/:id/status')

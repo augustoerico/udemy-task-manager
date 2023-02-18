@@ -19,7 +19,9 @@ export class TasksService {
     }
 
     async read(id: string, user: User): Promise<Task> {
-        return this.repository.findOne({ id, user });
+        const task = await this.repository.findOne({ id, user });
+        if (task) return task;
+        throw new NotFoundException(`Task with id = ${id} was not found`);
     }
 
     async readMany(filter: ReadManyFilter, user: User): Promise<Task[]> {

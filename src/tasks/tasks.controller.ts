@@ -3,7 +3,6 @@ import {
     Controller,
     Delete,
     Get,
-    NotFoundException,
     Param,
     Patch,
     Post,
@@ -34,9 +33,7 @@ export class TasksController {
 
     @Get('/:id')
     async read(@Param('id') id: string, @GetUser() user: User): Promise<Task> {
-        const task = await this.tasksServices.read(id, user);
-        if (task) return task;
-        throw new NotFoundException();
+        return await this.tasksServices.read(id, user);
     }
 
     @Get()

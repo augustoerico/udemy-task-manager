@@ -1,5 +1,5 @@
 GET http://localhost:3000/tasks
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2NzY3MzA0MjIsImV4cCI6MTY3NjczNDAyMn0.ABoEkvWyEeplnjwjS00Ax918nAOtxdua4Mor42vXp3U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2NzY3Mzk2NjEsImV4cCI6MTY3Njc0MzI2MX0.8NGaS0iO_XyVfU9Y5blX6rcSCTAqUqdGT7cnBF-z110
 
 ###
 

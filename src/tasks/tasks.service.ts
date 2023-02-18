@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TasksRepository } from './tasks.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { Status } from './task-status.enum';
 
 @Injectable()
 export class TasksService {
@@ -23,15 +24,19 @@ export class TasksService {
     //     return this.tasks;
     // }
 
-    // update(id: string, status: Status) {
-    //     const task = this.read(id);
-    //     if (task) {
-    //         task.status = status;
-    //     }
-    //     return task;
-    // }
+    async update(id: string, status: Status) {
+        const task = await this.read(id);
+        if (task) {
+            task.status = status;
+            this.repository.save(task);
+            return task;
+        }
+        throw new NotFoundException();
+    }
 
-    // delete(id: string) {
-    //     this.tasks = this.tasks.filter((task) => task.id !== id);
-    // }
+    async delete(id: string) {
+        const task = await this.read(id);
+        if (task) return this.repository.remove([task]);
+        throw new NotFoundException();
+    }
 }

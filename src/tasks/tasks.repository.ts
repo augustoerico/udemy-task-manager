@@ -5,6 +5,11 @@ import { Task } from './task.entity';
 
 @EntityRepository(Task)
 export class TasksRepository extends Repository<Task> {
+    async fetchManyTasks() {
+        const query = this.createQueryBuilder('task');
+        return query.getMany();
+    }
+
     async insertTask(dto: CreateTaskDto) {
         const { title, description } = dto;
         const task = this.create({

@@ -29,10 +29,10 @@ export class TasksController {
         throw new NotFoundException();
     }
 
-    // @Get()
-    // readMany(): Task[] {
-    //     return this.tasksServices.readMany();
-    // }
+    @Get()
+    async readMany(): Promise<Task[]> {
+        return this.tasksServices.readMany();
+    }
 
     @Patch('/:id/status')
     async update(@Param('id') id: string, @Body() dto: UpdateTaskStatusDto) {

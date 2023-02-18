@@ -20,9 +20,9 @@ export class TasksService {
         return this.repository.findOne({ id });
     }
 
-    // readMany(): Task[] {
-    //     return this.tasks;
-    // }
+    async readMany(): Promise<Task[]> {
+        return this.repository.fetchManyTasks();
+    }
 
     async update(id: string, status: Status) {
         const task = await this.read(id);

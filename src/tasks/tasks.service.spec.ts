@@ -4,6 +4,7 @@ import { TasksService } from './tasks.service';
 
 const mockTasksRepository = () => ({
     fetchManyTasks: jest.fn(),
+    findOne: jest.fn(),
 });
 
 const mockUser = {
@@ -42,6 +43,23 @@ describe('TasksService', () => {
                 mockUser,
             );
             expect(tasks).toEqual([]);
+        });
+    });
+
+    describe('read', () => {
+        it('should invoke TasksRepository.findOne', async () => {
+            // mock
+            tasksRepository.findOne.mockResolvedValue('some-value');
+
+            // when
+            const task = await tasksServices.read('some-id', mockUser);
+
+            // then
+            expect(tasksRepository.findOne).toHaveBeenCalledWith({
+                id: 'some-id',
+                user: mockUser,
+            });
+            expect(task).toEqual('some-value');
         });
     });
 });

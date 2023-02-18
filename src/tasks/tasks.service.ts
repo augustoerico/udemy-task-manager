@@ -30,17 +30,13 @@ export class TasksService {
 
     async update(id: string, status: Status, user: User) {
         const task = await this.read(id, user);
-        if (task) {
-            task.status = status;
-            this.repository.save(task);
-            return task;
-        }
-        throw new NotFoundException();
+        task.status = status;
+        this.repository.save(task);
+        return task;
     }
 
     async delete(id: string, user: User) {
         const task = await this.read(id, user);
-        if (task) return this.repository.remove([task]);
-        throw new NotFoundException();
+        return this.repository.remove([task]);
     }
 }

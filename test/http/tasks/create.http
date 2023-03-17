@@ -1,6 +1,6 @@
 POST http://localhost:3000/tasks
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2NzY3MzE2MzAsImV4cCI6MTY3NjczNTIzMH0.iBFWcIrzoX55CDNHtjm5rU85seo0JqRMFQh9l_BCqfQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWF0IjoxNjc5MDYwNjI0LCJleHAiOjE2NzkwNjQyMjR9.ywbZpcgFJI3qKSBsNlCT_o5XPZPqDg2dSPxdfaY0UlM
 
 {
     "title": "Practice the guitar",

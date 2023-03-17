@@ -1,10 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+    ConflictException,
+    Injectable,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { UsersRepository } from './users.repository';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
+import { User } from './user.entity';
 
 @Injectable()
 export class AuthService {
@@ -14,8 +19,13 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async signUp(dto: AuthCredentialsDto): Promise<void> {
-        await this.repository.createUser(dto);
+    async signUp(dto: AuthCredentialsDto): Promise<User> {
+        const user = await this.repository.findOne({ username: dto.username });
+        if (user) {
+            const message = 'username already taken';
+            throw new ConflictException(message);
+        }
+        return this.repository.createUser(dto);
     }
 
     async signIn(dto: AuthCredentialsDto): Promise<{ accessToken: string }> {

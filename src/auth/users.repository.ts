@@ -15,7 +15,7 @@ export class UsersRepository extends Repository<User> {
         const user = this.create({ username, password: hPassword });
 
         try {
-            await this.save(user);
+            return this.save(user);
         } catch (error) {
             if (error.code === '23505') {
                 throw new ConflictException('username already taken');

@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+    ConflictException,
+    Injectable,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { UsersRepository } from './users.repository';
@@ -16,6 +20,11 @@ export class AuthService {
     ) {}
 
     async signUp(dto: AuthCredentialsDto): Promise<User> {
+        const user = await this.repository.findOne({ username: dto.username });
+        if (user) {
+            const message = 'username already taken';
+            throw new ConflictException(message);
+        }
         return this.repository.createUser(dto);
     }
 

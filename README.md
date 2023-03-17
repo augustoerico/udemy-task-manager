@@ -9,7 +9,7 @@ Before starting the app, make sure you have a Postgres instance running with a d
 # Run
 
 ```shell
-npm run start:dev
+yarn start:dev
 ```
 
 # Tests
